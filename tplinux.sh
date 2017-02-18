@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 Menu(){
 	echo "Menu:"
 	echo "1/ Créer un utilisateur"
@@ -15,43 +17,54 @@ Menu(){
 
 	echo "A tout moment, la commande exit quitte le script"
 	read choix
+	clear
 
 	case $choix in
 	  1)
+		echo -e "Créer un utilisateur\n"
 		Ajoututilisateur
 	    ;;
 	  2)
+		echo -e "Mettre à jour la liste des paquets\n"
 	    Majlistpaquet
 		;;
 	  3)
+		echo -e "Mettre à jour les paquets\n"
 		Majpaquets
 	    ;;
 	  4)
+		echo -e "Mettre à jour la distibution\n"
 		Majdistrib
 		;;
 	  5)
+		echo -e "Chercher et installer des paquets\n"
 		SearchInstall
 		;;
 	  6)
+		echo -e "Contrôler et gèrer les droits utilisateur\n"
 		DroitUser
 		;;
 	  7)
+		echo -e "Petite introduction aux services\n"
 		IntroServices
 		;;
 	  8)
+		echo -e "informations concernant la machine\n"
 		InfoPC
 		;;
 	  9)
+		echo -e "Être Corpo Cogip\n"
 	  	echo "Cela s'apprend !"
 	  	xdg-open "https://www.youtube.com/watch?v=QYWGd3QhD48"	
 	  	;;
 	  10)
+		echo -e "Netacad et Inetdoc\n"
 		echo "Il FAUT faire les contrôles Netacad, et lire le cours sur Inetdoc"
 		xdg-open "https://www.netacad.com/"
 		xdg-open "https://inetdoc.net/"
 		;;
 	  *)
-		echo "Commande: $choix"
+		echo -e "Commande: $choix \n"
 		echo "Commande inconnu ou exit, byebye"
 		exit
 		;;
@@ -60,29 +73,36 @@ Menu(){
 
 Check4Commande(){
 	if [ $# -ne 4 ]; then
-		echo "Tu as oublié un argument ou en a un en trop"
+		clear
+		echo -e "\033[31mTu as oublié un argument ou en a un en trop\033[0m\n"
 		Menu
 	elif [ ! "$2" = "sudo"  ]; then
-		echo "sudo et $2 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31msudo et $2 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	elif [ ! $1 = $3 ]; then
-		echo "$1 et $3 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31m$1 et $3 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	fi
 }
 
 Check5Commande(){
 	if [ $# -ne 5 ]; then
-		echo "Tu as oublié un argument ou en a un en trop"
+		clear
+		echo -e "\033[31mTu as oublié un argument ou en a un en trop\033[0m\n"
 		Menu
 	elif [ ! "$3" = "sudo"  ]; then
-		echo "sudo et $3 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31msudo et $2 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	elif [ ! $1 = $4 ]; then
-		echo "$1 et $4 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31$1 et $4 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	elif [ ! $2 = $5 ]; then
-		echo "$2 et $5 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31m$2 et $5 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	fi
 }
@@ -92,13 +112,16 @@ Check5moreCommande(){
 		echo "Tu as oublié un argument ou plus"
 		Menu
 	elif [ ! "$3" = "sudo"  ]; then
-		echo "sudo et $3 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31msudo et $3 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	elif [ ! $1 = $4 ]; then
-		echo "$1 et $4 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31m$1 et $4 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	elif [ ! $2 = $5 ]; then
-		echo "$2 et $5 ne sont pas les mêmes commandes"
+		clear
+		echo -e "\033[31m$1 et $5 ne sont pas les mêmes commandes\033[0m\n"
 		Menu
 	fi
 }
@@ -117,12 +140,11 @@ CheckUser(){
 
 Ajoututilisateur(){
 	# commande adduser
-	echo ""
 	echo "Suivre les questions demandé par la commande"
 	echo "Pas besoin d'entrer toutes les informations demandé"
 	echo "hormis le mot de passe évidemment"
 	echo "Il faut être en root/super-utilisateur"
-	echo "commande: sudo adduser nomutilisateur (faut l'écrire maintenant)"
+	echo -e "commande: \033[32msudo adduser nomutilisateur\033[0m (faut l'écrire maintenant)"
     read commande
     echo "Tu as écris: $commande"
     echo ""
@@ -151,12 +173,12 @@ Ajoututilisateur(){
 
 Majlistpaquet(){
 	 # commande aptitude
-	echo ""
+
     echo "Pour mettre à jour la liste des paquets, vous devez utiliser la commande: aptitude update"
     echo "Si vous voulez perdre des points, utilisez apt-get."
     echo "Si vous voulez être futur-proof, utilisez apt"
     echo "Il faut de plus être en super-utilisateur, donc sudo devant la commande (ou être root)"
-    echo "Donc: sudo aptitude update"
+    echo -e "Donc: \033[32msudo aptitude update\033[0m"
     read commande
     Check5Commande "aptitude" "update" $commande
     echo "Tu as écris: $commande"
@@ -170,13 +192,13 @@ Majlistpaquet(){
 }
 
 Majpaquets(){
-	echo ""
+
     echo "Pour mettre à jour les paquets, vous devez utiliser la commande: aptitude upgrade"
     echo "Si vous voulez perdre des points, utilisez apt-get."
     echo "Si vous voulez être futur-proof, utilisez apt"
     echo "Il faut de plus être en super-utilisateur, donc sudo devant la commande (ou être root)"
 	echo "Différence entre update et upgrade ? Update mets à jour la liste des paquets pouvant être mis à jour, upgrade les mets à jour (et installe les nouvelles dépendances si nécessaire)"
-    echo "Donc: sudo aptitude upgrade"
+    echo -e "Donc: \033[32msudo aptitude upgrade\033[0m"
     read commande
 	    Check5Commande "aptitude" "upgrade" $commande
 
@@ -191,13 +213,13 @@ Majpaquets(){
 }
 
 Majdistrib(){
-	echo ""
+
     echo "Mettre à jour la distribution c'est plus «lourd» que juste mettre à jour les paquets, ça va en retirer certains, en ajouter d'autre, etc. Ça permet de passer sur la nouvelle version de [Debian|Ubuntu|etc]"
     echo "Si vous voulez perdre des points, utilisez apt-get."
     echo "Si vous voulez être futur-proof, utilisez apt"
     echo "Il faut de plus être en super-utilisateur, donc sudo devant la commande (ou être root)"
 	echo "Différence entre update et upgrade ? Update mets à jour la liste des paquets pouvant être mis à jour, upgrade les mets à jour (et installe les nouvelles dépendances si nécessaire)"
-    echo "Donc: sudo aptitude dist-upgrade"
+    echo -e "Donc: \033[32msudo aptitude dist-upgrade\033[0m"
     read commande
 	    Check5Commande "aptitude" "dist-upgrade" $commande
     echo "Tu as écris: $commande"
@@ -211,9 +233,9 @@ Majdistrib(){
 }
 
 SearchInstall(){
-	echo ""
-	echo "Pour rechercher un paquet, nous allons utiliser la commande: aptitude search motclé"
-	echo "Par exemple: sudo aptitude search wireshark"
+
+	echo -e "Pour rechercher un paquet, nous allons utiliser la commande: \033[32maptitude search motclé\033[0m"
+	echo -e "Par exemple: \033[32msudo aptitude search wireshark\033[0m"
 	read commande
 	    Check5moreCommande "aptitude" "search" $commande
     echo "Tu as écris: $commande"
@@ -231,10 +253,10 @@ SearchInstall(){
 }
 
 DroitUser(){
-	echo ""
+
 	echo "Parler des droits utilisateur ça peut prendre du temps, donc on va en parler juste rapidement, et juste assez pour que le prof ne voit pas de droit 0777 !"
 	echo "Tout d'abord on va créer un fichier, le plus simple c'est tout simplement la commande: touch nomdufichier"
-	echo "Par exemple: touch latualecranequibrille"
+	echo -e "Par exemple: \033[32mtouch latualecranequibrille\033[0m"
 	read commande
 	# check=`echo $commande | cut -d " " -f1`
 	if [ ! `echo $commande | cut -d " " -f1` = "touch" ]; then
@@ -250,15 +272,15 @@ DroitUser(){
 	echo ""
 
 	echo "Sur Debian (et toutes les autres ?) l'umask par défaut est 0022, donc le fichier aura comme droit -rw-r--r--, ou sinon on prend la permission par défaut, donc 666 et on y ôte le masque, donc 666 - 022 = 644."
-	echo "Pour vérifié, il n'y a pas 1500000000000 solutions, le plus rapide: ls -l nomdufichier"
-	echo "Par exemple: ls -l latualecranequibrille"
+	echo -e "Pour vérifié, il n'y a pas 1500000000000 solutions, le plus rapide: \033[32mls -l nomdufichier\033[0m"
+	echo -e "Par exemple: \033[32mls -l latualecranequibrille\033[0m"
 	echo ""
 
 	echo "-rw-r--r-- veut dire: fichier, lecture écriture en droit utilisateur, lecture en droit groupe, et lecture en droit pour les autres."
-	echo "Si on veut donner les droits d'exécution au groupe par exemple, il faut utiliser la command: chmod"
+	echo -e"Si on veut donner les droits d'exécution au groupe par exemple, il faut utiliser la command: \033[32mchmod\033[0m"
 	echo "Il y a plusieurs façon de l'utiliser, soit en spécifiant les nouveaux droits que pour l'user, groupe ou les autres (ou plusieurs en même temps) soit en donnant le droit tel que 777 directement"
-	echo "Pour donner les droits d'exécution au groupe donc: chmod g+x nomdufichier"
-	echo "Par exemple: chmod g+x latualecranequibrille"
+	echo -e "Pour donner les droits d'exécution au groupe donc: \033[32mchmod g+x nomdufichier\033[0m"
+	echo -e "Par exemple: \033[32mchmod g+x latualecranequibrille\033[0m"
 	read commande
 	# check=`echo $commande | cut -d " " -f1`
 	if [ ! `echo $commande | cut -d " " -f1` = "chmod" ]; then
@@ -292,8 +314,8 @@ DroitUser(){
 		eval $commande
 	fi
 	echo ""
-	echo "Pour modifier les droits par défaut, il faut changer l'umask, pour cela: umask xxxx"
-	echo "Par exemple: umask 0027"
+	echo -e "Pour modifier les droits par défaut, il faut changer l'umask, pour cela: \033[32mumask xxxx\033[0m"
+	echo -e "Par exemple: \033[32mumask 0027\033[0m"
 	echo "Ça donnera les droits -rw-r-----"
 	echo "Retour au menu !"
 	rm $nomfich
@@ -301,9 +323,9 @@ DroitUser(){
 }
 
 IntroServices(){
-	echo ""
+
 	echo "Pour voir la liste des services qui tournent sur une machine (munie de systemd, ce qui est le cas des machines un tant soit peu mise à jour)"
-	echo "Pour lister les services lancé (q pour quitter): systemctl"
+	echo -e "Pour lister les services lancé (q pour quitter): \033[32msystemctl\033[0m"
 	read commande
 	if [ ! `echo $commande` = "systemctl" ]; then
 		echo "J'ai dit systemctl..."
@@ -316,19 +338,19 @@ IntroServices(){
 	echo ""
 
 	echo "Pour voir l'état d'un service en particulier: systemctl status nomduservice"
-	echo "Par exemple: systemctl status cron.service"
+	echo -e "Par exemple: \033[32msystemctl status cron.service\033[0m"
 	echo ""
 	echo "(on le fera pas, flemme)"
 	echo "On peut voir que c'est chargé (active), qu'il tourne (running), et que ça sera lancé au démarrage (enabled)"
-	echo "Pour lancer, stopper, relancer, activer au démarrage: systemctl [start|stop|reload|enable] nomduservice"
+	echo -e "Pour lancer, stopper, relancer, activer au démarrage: \033[32msystemctl [start|stop|reload|enable] nomduservice\033[0m"
 	echo "Retour au menu !"
 	Menu
 }
 
 InfoPC(){
-	echo ""
+
 	echo "Pour afficher les informations de la machine nous avons plusieurs commandes"
-	echo "Tout d'abord les informations sur le processeur: lscpu"
+	echo -e "Tout d'abord les informations sur le processeur: \033[32mlscpu\033[0m"
 	read commande
 	if [ ! `echo $commande` = "lscpu" ]; then
 		echo "l s c p u"
@@ -340,7 +362,7 @@ InfoPC(){
 	eval $commande
 	echo ""
 
-	echo "Ensuite, les informations sur le bus PCI avec: lspci"
+	echo -e "Ensuite, les informations sur le bus PCI avec: \033[32mlspci\033[0m"
 	read commande
 	if [ ! `echo $commande` = "lspci" ]; then
 		echo "LsPcI"
@@ -352,7 +374,7 @@ InfoPC(){
 	eval $commande
 	echo ""
 
-	echo "Ensuite, les informations sur le bus PCI avec: lsusb"
+	echo -e "Ensuite, les informations sur le bus PCI avec: \033[32mlsusb\033[0m"
 	read commande
 	if [ ! `echo $commande` = "lsusb" ]; then
 		echo "Commande: lsusb"
@@ -364,9 +386,9 @@ InfoPC(){
 	eval $commande
 	echo ""
 
-	echo "Et enfin, on peux afficher les informations du noyau Linux avec la commande uname, pour tout voir «uname -a»"
+	echo -e "Et enfin, on peux afficher les informations du noyau Linux avec la commande uname, pour tout voir «\033[32muname -a\033[0m»"
 	read commande
-	if [ ! `echo $commande` = "uname -a" ]; then
+	if [ ! "$commande" = "uname -a" ]; then
 		echo "Commande: uname -a"
 		InfoPC
 	fi
@@ -379,7 +401,7 @@ InfoPC(){
 
 }
 
-echo "Instructions pour bien réussir (j'espère) le TP noté Linux"
+echo -e "\tInstructions pour bien réussir (j'espère) le TP noté Linux \n"
 while true; do
 	Menu
 done
